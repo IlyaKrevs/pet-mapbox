@@ -1,14 +1,15 @@
-.mainContainer {
+.wrapper {
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
 
     padding-top: 100px;
-    padding-left: calc(50% - 200px);
-    padding-right: calc(50% - 200px);
 }
 
+.mainContainer {
+    width: 400px;
+}
 
 .inputContainer {
     padding: 15px;
@@ -16,6 +17,5 @@
     display: flex;
 
     justify-content: center;
-    width: 300px;
     height: 50px;
 }

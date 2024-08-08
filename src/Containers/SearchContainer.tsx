@@ -15,6 +15,7 @@ export const SearchContainer = () => {
     const [chosenItem, setChosenItem] = useState<IResponseItem | null>(null)
 
     const timeoutID = useRef<NodeJS.Timeout>()
+    const inputContainerRef = useRef<HTMLDivElement>(null)
 
     const { data, isFetching } = useGetDataByTextQuery(searchValue, { skip: !searchValue.length })
 
@@ -29,6 +30,19 @@ export const SearchContainer = () => {
             setIsShowSuggestion(true)
         }, 500);
     }
+
+
+    useEffect(() => {
+        const handleClickOutside = (e: MouseEvent) => {
+            if (inputContainerRef.current && !inputContainerRef.current.contains(e.target as Node)) {
+                setIsShowSuggestion(false)
+            }
+        }
+
+        window.addEventListener('mousedown', handleClickOutside)
+
+        return () => window.removeEventListener('mousedown', handleClickOutside)
+    }, [])
 
 
     function handleFocusBlur(value: boolean) {
@@ -97,17 +111,18 @@ export const SearchContainer = () => {
     }
 
     return (
-        <div className={styles.mainContainer}
-            onClick={() => handleFocusBlur(false)}
-        >
-            <CustomInput
-                handlerFocusBlur={handleFocusBlur}
-                value={input}
-                changeHandler={changeHandler}
-            />
+        <div className={styles.wrapper} >
+            <div className={styles.mainContainer}
+                ref={inputContainerRef}
+            >
+                <CustomInput
+                    handlerFocusBlur={handleFocusBlur}
+                    value={input}
+                    changeHandler={changeHandler}
+                />
 
-            {content}
-
+                {content}
+            </div>
         </div>
     )
 }

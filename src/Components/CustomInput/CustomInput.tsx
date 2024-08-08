@@ -12,7 +12,6 @@ export const CustomInput: React.FC<ICustomInput> = ({ value, changeHandler, hand
     return (
         <input type="text"
             onFocus={() => handlerFocusBlur(true)}
-            onClick={(e: React.MouseEvent<HTMLInputElement, MouseEvent>) => e.stopPropagation()}
             className={styles.inputContainer}
             placeholder='Type a place name...'
             value={value}
