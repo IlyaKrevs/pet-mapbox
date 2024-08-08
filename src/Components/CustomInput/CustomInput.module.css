@@ -1,0 +1,9 @@
+.inputContainer {
+    padding: 15px;
+
+    display: flex;
+
+    justify-content: center;
+    width: 100%;
+    height: 50px;
+}
